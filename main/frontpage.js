@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       btnSenior: "senior.html"
     };
 
+    //creates buttons for each choice
     Object.entries(buttons).forEach(([id, target]) => {
       const btn = document.getElementById(id);
       if (btn) {
@@ -19,6 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // array to store chosen options
+  results = [];
+
+  // Scenario data for each role
 const scenarioData = {
     student: [
       {
@@ -236,19 +242,25 @@ const scenarioData = {
       }
     ]
   };
+
+  //finds the role selected
   const roles = Object.keys(scenarioData);
   const matchedRole = roles.find(role => path.includes(`${role}.html`));
 
+  // If a matching role is found, set up the scene
   if (matchedRole) {
+    // setting up what data goes where on the screen
     const choice1Btn = document.querySelectorAll(".button")[0];
     const choice2Btn = document.querySelectorAll(".button")[1];
     const sceneNumber = document.querySelector(".scene-number");
     const contentBox = document.querySelector(".content");
 
+    // Initialize scene counters
     let currentScenario = 0;
     let currentScene = 0;
 
     function renderScene() {
+      // saving the current scenario and scene into a variable
       const scenario = scenarioData[matchedRole][currentScenario];
       const scene = scenario.scenes[currentScene];
 
@@ -272,20 +284,37 @@ choice2Btn.innerHTML = `Choice 2:<br>${shuffledChoices[1]}`;
     }
 
     function handleChoice(choice) {
-     const isWrong1 = choice1Btn.dataset.isWrong === "true";
-const isWrong2 = choice2Btn.dataset.isWrong === "true";
-
+      // initially both choices are true
+      const isWrong1 = choice1Btn.dataset.isWrong === "true";
+      const isWrong2 = choice2Btn.dataset.isWrong === "true";
+//set which option is wrong 
 choice1Btn.style.backgroundColor = choice === "choice1" ? (isWrong1 ? "red" : "green") : "";
 choice2Btn.style.backgroundColor = choice === "choice2" ? (isWrong2 ? "red" : "green") : "";
 
+      // Determine which button is the wrong choice 
+      const chosenBtn = choice === "choice1" ? choice1Btn : choice2Btn;
+      const wasWrong = chosenBtn.dataset.isWrong === "true";
+      // pushing the results into the array
+      results.push({
+        scenario: matchedRole,
+        scene: currentScene+1,
+        choice: chosenBtn.textContent.replace("Choice 1:\n", "").replace("Choice 2:\n", ""),
+        isWrong: wasWrong
+      });
+      // Log the results array to the console
+      console.log(results);
+
+      //reset colors after 1 second
       setTimeout(() => {
         choice1Btn.style.backgroundColor = "";
         choice2Btn.style.backgroundColor = "";
       }, 1000);
 
+      // currently how many scenes and scenarios left
       const totalScenes = scenarioData[matchedRole][currentScenario].scenes.length;
       const totalScenarios = scenarioData[matchedRole].length;
 
+      // Check if we can move to the next scene or scenario
       if (currentScene < totalScenes - 1) {
         currentScene++;
       } else if (currentScenario < totalScenarios - 1) {
@@ -308,4 +337,6 @@ choice2Btn.style.backgroundColor = choice === "choice2" ? (isWrong2 ? "red" : "g
       choice2Btn.addEventListener("click", () => handleChoice("choice2"));
     }
   }
+
+
 });
