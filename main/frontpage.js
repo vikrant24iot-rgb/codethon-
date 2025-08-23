@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // array to store chosen options
-  results = [];
+  let results = [];
 
   // Scenario data for each role
 const scenarioData = {
@@ -296,11 +296,13 @@ choice2Btn.style.backgroundColor = choice === "choice2" ? (isWrong2 ? "red" : "g
       const wasWrong = chosenBtn.dataset.isWrong === "true";
       // pushing the results into the array
       results.push({
-        scenario: matchedRole,
+        scenario: scenarioData[matchedRole][currentScenario].title,
         scene: currentScene+1,
         choice: chosenBtn.textContent.replace("Choice 1:\n", "").replace("Choice 2:\n", ""),
         isWrong: wasWrong
       });
+      
+      localStorage.setItem("results", JSON.stringify(results));
       // Log the results array to the console
       console.log(results);
 
@@ -325,6 +327,11 @@ choice2Btn.style.backgroundColor = choice === "choice2" ? (isWrong2 ? "red" : "g
         sceneNumber.innerHTML = "";
         choice1Btn.style.display = "none";
         choice2Btn.style.display = "none";
+
+        setTimeout(() => {
+          window.location = "thirdpage.html";
+        }, 2000);
+
         return;
       }
 
