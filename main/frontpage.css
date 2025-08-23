@@ -85,7 +85,7 @@ font-weight: 600;
     flex-direction: column;
   }
   .images1 img {
-    width:120px;
+ width:120px;
   }
 }
   .images1 {
@@ -102,5 +102,11 @@ button:hover {
 }
 
 button:active {
-  transform: scale(0.95);
+  transform:scale(0.95);
+}
+.header{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  margin-bottom: 80px;
+
 }

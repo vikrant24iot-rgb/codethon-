@@ -9,9 +9,13 @@
   
 </head>
 <body>
+  
   <div>
+  
   <div class="header"> 
+  
     <img class="logo" src="main/images/updatedlogo.jpg">
+    <h1>Boost Your Knowledge On Cyber Safety</h1>
     
    
    
@@ -22,27 +26,33 @@
 
 
   </div>
-  <h2 class="second-header">Choose Your Character:</h2>
+
+  <h2 class="second-header"> Choose Your Character:</h2>
 <div class="outsidebox">
   <div class="images1">
   <img class="images" src="main/images/student.jpg">
-<button class="btn">Student</button>
+<button id="btnStudent" class="btn">Student</button>
   </div>
   <div class ="images1">
-        <button class="btn">Homemaker</button>
+        <button id="btnHomemaker" class="btn">Homemaker</button>
 
     <img class="images" src="main/images/homemaker.jpg">
 
   </div>
   <div class="images1">
     <img class="images" src="main/images/wp.jpg">
-   <button class="btn">Professional</button>
+   <button id="btnProfessional" class="btn">Professional</button>
   </div>
   <div class= "images1"> 
     <img class="images" src="main/images/old.jpg">
- <button class="btn">Sr. Citizen</button>
+ <button id="btnSenior" class="btn">Sr. Citizen</button>
   </div>
 
 </div>
+<script>document.getElementById("btnStudent").addEventListener("click", function() { window.location.href = "main/student.html"; });
+document.getElementById("btnHomemaker").addEventListener("click", function() { window.location.href = "main/homemaker.html"; });
+document.getElementById("btnProfessional").addEventListener("click", function() { window.location.href = "main/professional.html"; });
+document.getElementById("btnSenior").addEventListener("click", function() { window.location.href = "main/senior.html"; });
+</script>
 </body>
 </html>

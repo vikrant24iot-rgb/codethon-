@@ -7,6 +7,15 @@
 
 }
 
+.header{
+    display:grid;
+    grid-template-columns: 400 px 1fr;
+    color:  #17e3ff;
+    font-size:33px;
+   
+    
+}
+
 .logo{
     display:flex;
     font-weight:bold;
@@ -14,7 +23,7 @@
     font-size:20px;
     height:100px;
     width:155px;
-    margin: 0;
+    margin-right:40px;
     
 }
 
